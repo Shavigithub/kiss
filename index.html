@@ -76,13 +76,40 @@ gap:20px;
 margin:20px 0;
 }
 
+/* ✨ Glowing Love Aura Around Photos */
 .photos img{
 width:120px;
 height:120px;
 border-radius:50%;
 object-fit:cover;
-border:3px solid white;
-box-shadow:0 0 30px pink;
+border:3px solid rgba(255,255,255,0.8);
+position:relative;
+
+/* Multi-layer love glow */
+box-shadow:
+0 0 15px #ff4d88,
+0 0 30px #ff4d88,
+0 0 60px #ff1a66,
+0 0 90px rgba(255,0,80,0.8);
+
+/* Smooth glowing animation */
+animation: loveGlow 3s ease-in-out infinite alternate;
+}
+
+/* Aura pulse animation */
+@keyframes loveGlow{
+from{
+box-shadow:
+0 0 10px #ff4d88,
+0 0 20px #ff4d88,
+0 0 40px #ff1a66;
+}
+to{
+box-shadow:
+0 0 25px #ff66a3,
+0 0 50px #ff1a66,
+0 0 100px rgba(255,0,80,1);
+}
 }
 
 /* Button */
@@ -133,6 +160,24 @@ transform:translateY(110vh) rotate(360deg);
 opacity:0;
 }
 }
+/* ✨ Heart particles around photos */
+.photo-container{
+position:relative;
+display:inline-block;
+}
+
+.heart-particle{
+position:absolute;
+color:#ff4d88;
+font-size:14px;
+pointer-events:none;
+animation:heartFloat 2s linear forwards;
+}
+
+@keyframes heartFloat{
+0%{transform:translateY(0) scale(1);opacity:1;}
+100%{transform:translateY(-60px) scale(0.5);opacity:0;}
+}
 
 </style>
 </head>
@@ -154,9 +199,15 @@ opacity:0;
 <h1>Happy Kiss Day, Puchi ❤️</h1>
 
 <div class="photos">
-<img src="1.jpeg">
-<img src="2.jpeg">
+<div class="photo-container">
+<img src="1.jpeg" onclick="heartbeat(this)">
 </div>
+
+<div class="photo-container">
+<img src="2.jpeg" onclick="heartbeat(this)">
+</div>
+</div>
+
 
 <!-- 💌 Typing Love Letter -->
 <p id="loveText"></p>
@@ -164,7 +215,7 @@ opacity:0;
 <button onclick="kiss()">Send My Kiss 💋</button>
 <p id="msg"></p>
 
-<p style="margin-top:20px">Forever yours ❤️<br><b>— YOUR_NAME</b></p>
+<p style="margin-top:20px">Forever yours ❤️<br><b>— Puccha</b></p>
 
 </div>
 </div>
@@ -234,6 +285,34 @@ document.body.addEventListener("click", function(){
 const music=document.getElementById("bgMusic");
 music.play();
 });
+/* Create glowing heart particles around photo */
+function createHeartParticles(container){
+for(let i=0;i<6;i++){
+const heart=document.createElement("div");
+heart.classList.add("heart-particle");
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"px";
+heart.style.top=Math.random()*100+"px";
+
+container.appendChild(heart);
+setTimeout(()=>heart.remove(),2000);
+}
+}
+/* Cherry Blossom Animation */
+function createPetal(){
+const petal=document.createElement("div");
+petal.classList.add("petal");
+petal.innerHTML="🌸";
+
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(Math.random()*5+5)+"s";
+
+document.body.appendChild(petal);
+setTimeout(()=>petal.remove(),10000);
+}
+
+setInterval(createPetal,700);
 
 </script>
 
