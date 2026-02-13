@@ -1,0 +1,9 @@
+@keyframes popupFade {
+    from { transform: scale(0.7); opacity:0; }
+    to { transform: scale(1); opacity:1; }
+}
+
+@keyframes qrGlow {
+    from { box-shadow:0 0 20px rgba(255,255,255,0.4); }
+    to { box-shadow:0 0 60px rgba(255,255,255,0.9); }
+}

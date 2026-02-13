@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Kiss Day Puchi 💋</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== BODY ===== */
+body{
+margin:0;
+font-family:'Poppins', sans-serif;
+overflow:hidden;
+background:black;
+color:white;
+}
+
+/* ===== STAR SKY ===== */
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:black url("https://www.transparenttextures.com/patterns/stardust.png");
+z-index:-2;
+}
+
+/* ===== SHOOTING STAR ===== */
+.shooting-star{
+position:absolute;
+width:2px;
+height:100px;
+background:linear-gradient(-45deg,white,transparent);
+opacity:0.8;
+transform:rotate(45deg);
+animation:shoot 3s linear infinite;
+}
+
+@keyframes shoot{
+0%{
+transform:translateX(-100px) translateY(0) rotate(45deg);
+opacity:1;
+}
+100%{
+transform:translateX(1000px) translateY(600px) rotate(45deg);
+opacity:0;
+}
+}
+
+/* ===== MAIN ===== */
+.main{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+/* Glass card */
+.app{
+width:360px;
+padding:30px;
+border-radius:25px;
+text-align:center;
+background:rgba(255,255,255,0.1);
+backdrop-filter: blur(20px);
+box-shadow:0 0 40px rgba(255,105,180,0.3);
+}
+
+/* Photos */
+.photos{
+display:flex;
+justify-content:center;
+gap:20px;
+margin:20px 0;
+}
+
+.photos img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid white;
+box-shadow:0 0 30px pink;
+}
+
+/* Button */
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff4d88,#ff1a66);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* Floating hearts */
+.heart{
+position:absolute;
+bottom:-10px;
+font-size:20px;
+animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+to{transform:translateY(-110vh);opacity:0;}
+}
+
+/* Typing effect */
+#loveText{
+font-size:16px;
+margin-top:15px;
+min-height:60px;
+}
+/* ===== ROSE PETALS FALLING ===== */
+.petal{
+position:fixed;
+top:-20px;
+font-size:22px;
+animation: fallPetal linear forwards;
+opacity:0.9;
+z-index:0;
+}
+
+@keyframes fallPetal{
+0%{
+transform:translateY(-20px) rotate(0deg);
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🌌 Star background -->
+<div class="stars"></div>
+
+<!-- 🎹 Soft Romantic Piano Music -->
+<audio id="bgMusic" autoplay loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+
+<div class="main">
+<div class="app">
+
+<h1>Happy Kiss Day, Puchi ❤️</h1>
+
+<div class="photos">
+<img src="1.jpeg">
+<img src="2.jpeg">
+</div>
+
+<!-- 💌 Typing Love Letter -->
+<p id="loveText"></p>
+
+<button onclick="kiss()">Send My Kiss 💋</button>
+<p id="msg"></p>
+
+<p style="margin-top:20px">Forever yours ❤️<br><b>— YOUR_NAME</b></p>
+
+</div>
+</div>
+
+<script>
+
+/* ===== Typing Love Letter Effect ===== */
+const text = "My dearest Puchi, every moment with you feels like magic. You are the reason for my smile, my happiness, and my endless love. I promise to love you today, tomorrow, and forever ❤️";
+let i = 0;
+
+function typing(){
+if(i < text.length){
+document.getElementById("loveText").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing,50);
+}
+}
+typing();
+
+/* ===== Shooting Stars Generator ===== */
+function createShootingStar(){
+const star=document.createElement("div");
+star.classList.add("shooting-star");
+star.style.top=Math.random()*window.innerHeight+"px";
+star.style.left=Math.random()*window.innerWidth+"px";
+star.style.animationDuration=(Math.random()*2+2)+"s";
+document.body.appendChild(star);
+setTimeout(()=>star.remove(),3000);
+}
+setInterval(createShootingStar,2000);
+
+/* ===== Floating Hearts ===== */
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+4)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,900);
+/* ===== Rose Petals Animation ===== */
+function createPetal(){
+const petal=document.createElement("div");
+petal.classList.add("petal");
+petal.innerHTML="🌹";
+
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(Math.random()*5+5)+"s";
+
+document.body.appendChild(petal);
+
+setTimeout(()=>petal.remove(),10000);
+}
+
+/* Create petals continuously */
+setInterval(createPetal,700);
+
+/* Kiss button */
+function kiss(){
+document.getElementById("msg").innerHTML=
+"Close your eyes... feel my kiss on your forehead 💋❤️";
+}
+/* Enable music on first tap (for mobile browsers) */
+document.body.addEventListener("click", function(){
+const music=document.getElementById("bgMusic");
+music.play();
+});
+
+</script>
+
+</body>
+</html>
